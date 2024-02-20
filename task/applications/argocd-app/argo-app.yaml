@@ -1,1 +1,22 @@
 #Write Me
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-app
+  namespace: tiacourses
+spec:
+  destination:
+    server: 'https://127.0.0.1:33597'
+    namespace: tiacourses
+  project: default
+  source:
+    repoURL: 'https://github.com/tiacloudconsult/interviews.git' 
+    path: task/applications/k8s
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - Validate=true
